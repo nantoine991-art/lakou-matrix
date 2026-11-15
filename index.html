@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta charset="utf-8">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Noto+Sans:wght@500;800&family=Noto+Sans+Bengali:wght@600;800&family=Noto+Naskh+Arabic:wght@600;700&family=Noto+Nastaliq+Urdu:wght@600;700&family=Noto+Sans+Hebrew:wght@600;800&display=swap">
 <style>
 /* Layout: an orbital diagram on a drafting sheet (left), a control, review and edit column (right); stacks on phones. */
 :root{
@@ -49,6 +49,13 @@ button:focus-visible,select:focus-visible,input:focus-visible,textarea:focus-vis
 .board.editing{outline:2px dashed var(--vermilion);outline-offset:-6px}
 .legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:12px;color:var(--muted);padding:6px 6px 2px}
 .legend span{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.howto{display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);gap:4px 22px;align-items:center;width:100%}
+.howh{grid-column:1/-1;margin:2px 0 0;font:900 italic 14px var(--f-display);color:var(--vermilion)}
+.howsvg{width:100%;height:auto;display:block}
+.hlab{font:italic 400 9.5px var(--f-body);fill:var(--muted);paint-order:stroke;stroke:var(--sheet);stroke-width:4px;stroke-linejoin:round}
+.hownotes{display:flex;flex-wrap:wrap;gap:8px 16px;min-width:0}
+.hownotes span{white-space:normal}
+@media (max-width:760px){.howto{grid-template-columns:minmax(0,1fr)}}
 .hint{position:absolute;left:16px;top:14px;font:600 12px var(--f-data);color:var(--vermilion);background:var(--sheet);padding:4px 8px;border-radius:6px;border:1px solid var(--vermilion)}
 aside{display:flex;flex-direction:column;gap:14px;min-width:0}
 .panel{background:var(--sheet);border:1px solid var(--rule);border-radius:6px;padding:16px 18px}
@@ -104,6 +111,7 @@ tfoot td{font:600 12px var(--f-data);font-variant-numeric:tabular-nums;border-bo
 svg text{fill:var(--ink)}
 .clabel{font:900 21px var(--f-display);paint-order:stroke;stroke:var(--halo);stroke-width:5px;stroke-linejoin:round}
 .csub{font:300 14px var(--f-body);fill:var(--muted);paint-order:stroke;stroke:var(--halo);stroke-width:4px}
+.dtag{stroke:none!important;font-size:11.5px!important;letter-spacing:.05em}
 .dlabel{font:800 14px var(--f-display);font-stretch:125%;letter-spacing:.04em;text-transform:uppercase;paint-order:stroke;stroke:var(--halo);stroke-width:5px;stroke-linejoin:round}
 .plabel{font:500 15px var(--f-body);paint-order:stroke;stroke:var(--halo);stroke-width:5px;stroke-linejoin:round;pointer-events:none}
 .shlabel{font:300 12px var(--f-body);fill:var(--muted);letter-spacing:.06em}
@@ -121,15 +129,123 @@ svg text{fill:var(--ink)}
 .lens svg{flex:1;min-height:0;width:100%;height:100%}
 .lens .tslot{font-size:9px}.lens .tcap{font-size:13px;stroke-width:4px}
 .tchip{font:500 12px var(--f-data)}
+
+/* ---------- easy to use: bigger targets, guide, back button, larger text ---------- */
+.btn{min-height:40px;font-size:14px;padding:8px 16px}
+.btn.sm{min-height:32px}
+.seg button{min-height:34px;font-size:14px}
+.gridbg{pointer-events:none}
+.guide{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+.guide li{display:flex;align-items:center;gap:8px;font-size:14.5px}
+.guide b{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--ink);color:var(--sheet);font:900 13px var(--f-display);flex:none}
+.guide .gx{margin-left:auto}
+.guide .gx .btn{min-height:34px;padding:5px 12px;font-size:13px}
+.linkish{appearance:none;border:0;background:none;padding:0;font:inherit;color:var(--ink);text-decoration:underline;text-decoration-color:var(--vermilion);text-underline-offset:3px;cursor:pointer;min-height:32px}
+.back{position:absolute;left:18px;top:62px;z-index:3;background:var(--ink);color:var(--sheet);border-color:var(--ink);font-weight:700;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+html.bigtype body{font-size:17.5px}
+html.bigtype .btn,html.bigtype .seg button{font-size:16px}
+html.bigtype .guide li{font-size:17px}
+html.bigtype .clabel{font-size:27px}
+html.bigtype .csub{font-size:17px}
+html.bigtype .plabel{font-size:19px}
+html.bigtype .shlabel{font-size:14px}
+html.bigtype .dtag{font-size:13.5px!important}
+html.bigtype .oradial{font-size:11.5px}
+html.bigtype .tcap{font-size:11px}
+html.bigtype .hlab{font-size:11.5px}
+html.bigtype select,html.bigtype input,html.bigtype textarea{font-size:16px}
+/* phones: readable names on the map, details on demand */
+@media (max-width:700px){
+  .clabel{font-size:31px}.csub{display:none}.dtag{font-size:13px!important}.plabel{font-size:26px}.shlabel{display:none}
+  .guide li{font-size:15px}.guide .gx{margin-left:0}
+  .back{position:fixed;top:auto;bottom:calc(14px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);min-height:48px;font-size:16px;padding:10px 22px}
+}
+/* large screens and exhibit displays: let the map grow */
+@media (min-width:1800px){
+  .wrap{max-width:min(2400px,94vw)}
+  .work{grid-template-columns:minmax(0,2.4fr) minmax(380px,1fr)}
+  body{font-size:17px}.btn,.seg button{font-size:16px}
+}
+@media (min-width:2400px){body{font-size:19px}.btn,.seg button{font-size:18px}.guide li{font-size:19px}}
+html.exhibit #adminPanel,html.exhibit #setPanel{display:none}
+.back{white-space:nowrap}
+@media (min-width:981px){.board svg#web{max-height:calc(100vh - 150px)}}
+.ilist{display:none;list-style:none;margin:8px 0 0;padding:0;width:100%;max-width:440px;text-align:left}
+.ilist li{border-top:1px solid var(--rule)}
+.ilist li:last-child{border-bottom:1px solid var(--rule)}
+.ilist button{appearance:none;width:100%;display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:center;gap:12px;background:none;border:0;padding:12px 6px;min-height:60px;color:var(--ink);font:inherit;text-align:inherit;cursor:pointer}
+.ilist .nm{font:800 22px/1.15 var(--f-display)}
+.ilist .en{display:block;font:300 13.5px var(--f-body);color:var(--muted)}
+.ilist .go{font:900 italic 14px var(--f-display);background:var(--ink);color:var(--sheet);padding:7px 12px}
+.ilist button[aria-disabled="true"]{opacity:.45;cursor:not-allowed}
+.ilist button[aria-disabled="true"] .go{display:none}
+@media (max-width:700px){#introSvg{display:none!important}.ilist{display:block}.intro-h{font-size:clamp(40px,13vw,64px)}}
+.aystats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:8px}
+.aystats div{background:var(--paper);padding:8px 10px;display:flex;flex-direction:column}
+.aystats b{font:900 24px var(--f-display);font-variant-numeric:tabular-nums}
+.aystats span{font-size:11.5px;color:var(--muted)}
+.aybars{display:grid;gap:5px;margin-top:6px}
+.aybar{display:grid;grid-template-columns:76px minmax(0,1fr) 22px;align-items:center;gap:8px;font-size:12.5px}
+.aybar i{display:block;height:8px;min-width:2px}
+.aybar em{font-style:normal;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+
+/* language intro: same sheet, grid, core, spokes and labels as the matrix */
+.intro{position:fixed;inset:0;z-index:60;overflow:auto;background-color:var(--paper);
+  background-image:linear-gradient(var(--rule) .5px,transparent .5px),linear-gradient(90deg,var(--rule) .5px,transparent .5px);background-size:22px 22px;background-position:center;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-bottom,0px))}
+.intro-in{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.intro-k{margin:6px 0 0;font:500 11px var(--f-body);letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
+.intro-h{margin:0;font:900 clamp(40px,8vw,96px)/.92 var(--f-display);font-stretch:125%;letter-spacing:-.01em;text-transform:uppercase}
+.intro-h em{font-style:normal;color:var(--vermilion)}
+.intro-sub{margin:4px 0 0;font:500 11.5px/1.7 var(--f-body);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-wrap:balance}
+#introSvg{width:100%;max-width:1000px;height:auto;display:block;touch-action:manipulation}
+.intro-key{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:12px;color:var(--muted)}
+.intro-key span{display:inline-flex;align-items:center;gap:6px}
+.intro-msg{margin:0;font-size:13px;color:var(--ink);min-height:1.5em}
+.ilang{cursor:pointer;outline:none}
+.ilang.off{cursor:not-allowed}
+.ilang:focus-visible .ifocus{stroke:var(--vermilion);stroke-width:2}
+.intro.out{animation:introOut .55s ease-in forwards}
+@keyframes introOut{to{opacity:0;transform:scale(1.04)}}
+.ishake{animation:ishake .35s}
+@keyframes ishake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.ctagt{font:900 italic 10.5px var(--f-display);fill:var(--sheet);letter-spacing:.02em}
+@keyframes cpulse{from{r:var(--r0);opacity:.75}to{r:var(--r1);opacity:0}}
+.cpulse{opacity:0;animation:cpulse 1.05s cubic-bezier(.2,.7,.3,1) forwards;pointer-events:none}
+.ozone{font:700 6.5px var(--f-body);letter-spacing:.22em;pointer-events:none}
+.oradial{font:italic 400 9.5px var(--f-body);fill:var(--ink)}
+.otitle{font:900 17px var(--f-display);font-stretch:112.5%}
+.osub{font:300 9px var(--f-body);fill:var(--muted);letter-spacing:.04em}
+@keyframes odraw{to{stroke-dashoffset:0}}
+@keyframes ofade{from{opacity:0}to{opacity:1}}
+@keyframes ogrow{from{opacity:0;transform:scale(.2) rotate(-25deg)}to{opacity:1;transform:none}}
+@keyframes opop{0%{transform:scale(1)}40%{transform:scale(1.6)}100%{transform:scale(1)}}
+.o-draw{animation:odraw .9s cubic-bezier(.3,.7,.2,1) forwards}
+.o-fade{opacity:0;animation:ofade .45s ease-out forwards}
+.o-grow{opacity:0;animation:ogrow .8s cubic-bezier(.2,.9,.25,1.15) forwards}
+.o-pop{animation:opop .55s ease-out}
 </style>
 
+<div id="intro" class="intro" role="dialog" aria-modal="true" aria-labelledby="introTitle" hidden>
+  <div class="intro-in">
+    <p class="intro-k">Newkirk Plaza · Flatbush, Brooklyn</p>
+    <h2 class="intro-h" id="introTitle">Lakou <em>Matrix</em></h2>
+    <p class="intro-sub">Choose your language · Chwazi lang ou · Elige tu idioma · Choisissez votre langue</p>
+    <svg id="introSvg" viewBox="-600 -400 1200 800" role="group" aria-label="Choose a language"></svg>
+    <ul class="ilist" id="introList" aria-label="Choose a language"></ul>
+    <div class="intro-key"><span><svg width="16" height="16"><circle cx="8" cy="8" r="6" fill="var(--green)"/></svg>Ready</span><span><svg width="16" height="16"><circle cx="8" cy="8" r="5.5" fill="none" stroke="var(--muted)" stroke-width="1.6" stroke-dasharray="2.5 2.5"/></svg>Translation coming soon</span></div>
+    <p class="intro-msg" id="introMsg" aria-live="polite">Tap a language to enter the matrix.</p>
+  </div>
+</div>
 <div class="wrap">
   <header>
     <div>
       <h1>Lakou <em>Matrix</em></h1>
-      <p class="sub">An orbital map of what Haitian culture shares with its Flatbush and Kensington neighbors. Ayiti sits at the core. Spokes run out through the shared lenses, and each culture grounds onto a spoke at a charge point. Stronger overlaps sit on shells closer to the core. Move your cursor through it to feel the pull.</p>
+      <p class="sub">An orbital map of what Haitian culture shares with its Flatbush and Kensington neighbors. Ayiti sits at the core. Spokes run out through the shared lenses, and each culture grounds onto a spoke at a charge point. Stronger overlaps sit on shells closer to the core. Tap or click any circle to explore it.</p>
     </div>
     <div class="bar">
+      <button class="btn" id="langBtn" type="button" aria-label="Change language">Language · English</button>
+      <button class="btn" id="typeBtn" type="button" aria-pressed="false">Larger text</button>
       <span class="badge" id="modeBadge">Demo</span>
       <button class="btn" id="editToggle" type="button" aria-pressed="false" hidden>Edit on the graphic</button>
       <div class="seg" role="group" aria-label="View">
@@ -141,6 +257,13 @@ svg text{fill:var(--ink)}
 
   <div class="work">
     <div class="board" id="board">
+      <ol class="guide" id="guide" aria-label="How to explore">
+        <li><b>1</b><span>Tap a <strong>culture</strong> to see what it shares</span></li>
+        <li><b>2</b><span>Tap a <strong>dot</strong> to open its story</span></li>
+        <li><b>3</b><button class="linkish" id="guideAdd" type="button"><strong>Add</strong> something you share</button></li>
+        <li class="gx"><button class="btn" id="guideHide" type="button" aria-label="Hide these tips">Hide tips</button></li>
+      </ol>
+      <button class="btn back" id="backBtn" type="button" hidden>← Back to the whole map</button>
       <svg id="web" viewBox="-230 -40 1460 1080" role="img" aria-label="Orbital diagram: Ayiti at the core, spokes through shared lenses, charge points on three shells, cultures on the outer orbit"></svg>
       <div id="matrix" class="matrix-scroll" hidden></div>
       <div class="hint" id="editHint" hidden>Edit mode · drag a point along its spoke to change its shell, or onto another spoke to change its lens</div>
@@ -187,14 +310,14 @@ svg text{fill:var(--ink)}
         </details>
       </section>
 
-      <section class="panel">
-        <p class="eyebrow">Control the orbit</p>
+      <section class="panel" id="setPanel">
+        <details id="setDetails"><summary>Display settings</summary>
         <div class="ctl">
           <label>Open an overlap<select id="orbitMode"><option value="zoom">Zoom to point</option><option value="place">In place</option><option value="panel">Centered panel</option></select></label>
           <label>Cursor gravity<select id="gravity"><option value="on">On</option><option value="off">Off</option></select></label>
           <label>Place cultures by<select id="geo"><option value="even">Even spacing</option><option value="geo">Real direction (bearing)</option></select></label>
           <label>Distance from core<select id="radius"><option value="fixed">Fixed orbit</option><option value="momentum">Population</option><option value="walk">Walking minutes</option></select></label>
-          <label>Color by<select id="colorBy"><option value="culture">Culture</option><option value="pillar">Pillar</option></select></label>
+          <label>Color by<select id="colorBy"><option value="blend">Blend: pillar spokes, culture dots</option><option value="culture">Culture</option><option value="pillar">Pillar</option></select></label>
           <label>Point labels<select id="labels"><option value="focus">On focus</option><option value="all">All</option><option value="none">None</option></select></label>
           <label>Culture size<select id="momentum"><option value="size">Population</option><option value="off">Same size</option></select></label>
           <label>Threads<select id="threads"><option value="curve">Curved</option><option value="straight">Straight</option></select></label>
@@ -206,9 +329,10 @@ svg text{fill:var(--ink)}
           <label>Thread weight<input type="range" id="tScale" min="0.4" max="2.5" step="0.1"></label>
           <label>Minimum strength<select id="minS"><option value="1">1 and up</option><option value="2">2 and up</option><option value="3">3 only</option></select></label>
           <label>Evidence<select id="evid"><option value="all">Both</option><option value="doc">Documented only</option><option value="hyp">Hypotheses only</option></select></label>
-          <div class="row full"><button class="btn" id="clearFocus" type="button">Clear focus</button><button class="btn" id="resetView" type="button">Reset display</button></div>
+          <div class="row full"><button class="btn" id="clearFocus" type="button">Clear focus</button><button class="btn" id="resetView" type="button">Reset display</button><button class="btn" id="setHome" type="button" hidden>Use this as the reset view</button></div>
           <p class="note full" id="geoNote" hidden></p>
         </div>
+        </details>
       </section>
 
       <section class="panel" id="iterPanel" hidden>
@@ -250,7 +374,7 @@ svg text{fill:var(--ink)}
         </details>
       </section>
 
-      <section class="panel">
+      <section class="panel" id="adminPanel">
         <details>
           <summary>Sign in, export, import</summary>
           <div class="ctl" id="signInBox">
@@ -336,11 +460,19 @@ const SEED_CONN=[
  ["jew","mkt",1,"hyp","Neighborhood shopping street","Midwood's shopping streets are a parallel neighborhood corridor. Weak link.","Verify before designing for it."]
 ].map((a,i)=>({id:"x"+(i+1),c:a[0],d:a[1],s:a[2],k:a[3],evidence:a[3]==="doc"?"documented":"hypothesis",t:a[4],n:a[5],q:a[6],status:"Approved",photos:[],sound:null,credit:""}));
 const clone=o=>JSON.parse(JSON.stringify(o));
+const narrow=()=>matchMedia("(max-width:700px)").matches;
+// Dropbox / Google Drive share links -> direct image links (same rule as the server function)
+function imgLink(u){try{const x=new URL(u.trim());
+  if(/(^|\.)dropbox\.com$/.test(x.hostname)){x.searchParams.delete("dl");x.searchParams.set("raw","1");return x.href}
+  const m=x.href.match(/drive\.google\.com\/(?:file\/d\/|open\?id=|uc\?id=)([\w-]+)/);if(m)return `https://drive.google.com/thumbnail?id=${m[1]}&sz=w1600`;
+  return x.protocol==="https:"?x.href:null}catch(e){return null}}
+const imgLinks=t=>String(t||"").split(/\s+/).map(imgLink).filter(Boolean).slice(0,6).map(url=>({url,name:""}));
 const SEED={cultures:SEED_CULT,lenses:SEED_LENS,connectors:SEED_CONN};
-const DEF_SET={orbitMode:"zoom",gravity:"on",geo:"even",radius:"fixed",colorBy:"culture",labels:"focus",momentum:"size",threads:"curve",shellOrder:"in",showShells:"on",rotC:0,rotD:0,pScale:1,tScale:1,minS:"1",evid:"all",order:null};
-const LKEY="lakou-v5",SKEY="lakou-set-v5";
+const DEF_SET={orbitMode:"zoom",gravity:"on",geo:"even",radius:"fixed",colorBy:"blend",labels:"focus",momentum:"size",threads:"curve",shellOrder:"in",showShells:"on",rotC:0,rotD:0,pScale:1,tScale:1,minS:"1",evid:"all",order:null};
+const LKEY="lakou-v5",SKEY="lakou-set-v7";
 
 // ============ state ============
+let HOME=null;
 let D=clone(SEED),S=clone(DEF_SET),MODE="demo",ROLE="owner",KEY="",ITERS=[],UNLINKED=0;
 let focus=null,sel=null,view="web",editing=false,editMode=false,orbitFor=null;
 const $=id=>document.getElementById(id);
@@ -377,7 +509,7 @@ async function pull(){
 async function boot(){
   try{KEY=sessionStorage.getItem("lakou-key")||""}catch(e){}
   try{const j=await pull();MODE="live";
-    const local=JSON.parse(tryLS(SKEY)||"null");S=Object.assign(clone(DEF_SET),j.settings||{},local||{});
+    HOME=Object.assign(clone(DEF_SET),j.settings||{});const local=JSON.parse(tryLS(SKEY)||"null");S=Object.assign(clone(HOME),local||{});
     try{tryLS("lakou-live-snapshot",JSON.stringify({D,at:Date.now()}))}catch(e){}
   }catch(e){
     MODE="demo";ROLE="owner";
@@ -386,7 +518,8 @@ async function boot(){
       const v3=JSON.parse(tryLS("lakou-v3")||"null");
       if(v3&&v3.data){const base=clone(SEED);v3.data.connectors.forEach(x=>{if(!base.connectors.some(y=>y.t===x.t))base.connectors.push({...x,evidence:x.k==="doc"?"documented":"hypothesis",status:"Approved",photos:[],sound:null})});D=base}
     }}catch(e){}
-    S=Object.assign(clone(DEF_SET),JSON.parse(tryLS(SKEY)||"null")||{});
+    HOME=Object.assign(clone(DEF_SET),JSON.parse(tryLS("lakou-home")||"null")||{});
+    S=Object.assign(clone(HOME),JSON.parse(tryLS(SKEY)||"null")||{});
   }
   syncCtl();renderAll();startGravity();recoverV1();
 }
@@ -453,15 +586,18 @@ function threadGeom(pt,ox,oy){
 }
 function drawWeb(){
   const svg=$("web");svg.replaceChildren();PTS=[];
+  { const gd=el("defs"),gp=el("pattern",{id:"webGrid",width:20,height:20,patternUnits:"userSpaceOnUse"});
+    gp.append(el("path",{d:"M20 0 H0 V20",fill:"none",stroke:"var(--rule)","stroke-width":.5}));gd.append(gp);svg.append(gd);
+    svg.append(el("rect",{x:BASEVB()[0],y:BASEVB()[1],width:BASEVB()[2],height:BASEVB()[3],fill:"url(#webGrid)",opacity:.55,class:"gridbg"})); }
   const L=visible(),T=totals(),maxT=Math.max(1,...Object.values(T)),pos=layoutPoints(L),anyFocus=!!(focus||sel);
   CL=cultureLayout();const LN=lenses(),CU=cultures();
   // rings + compass
   if(S.showShells==="on"){
-    [3,2,1].forEach(s=>{const r=SHELL(s);svg.append(el("circle",{cx:CX,cy:CY,r,fill:"none",stroke:"var(--muted)","stroke-dasharray":"2 5","stroke-linecap":"round","stroke-width":.8,opacity:.5}));
+    [3,2,1].forEach(s=>{const r=SHELL(s);svg.append(el("circle",{cx:CX,cy:CY,r,fill:"none",stroke:"var(--muted)","stroke-dasharray":"2 5","stroke-linecap":"round","stroke-width":1.15,opacity:.6}));
       const la=-Math.PI/2+Math.PI/CU.length+S.rotC*Math.PI/180,lp=polar(r+4,la);
       svg.append(el("text",{x:lp.x,y:lp.y,class:"shlabel","text-anchor":"middle",transform:`rotate(${la*180/Math.PI+90} ${lp.x} ${lp.y})`},`SHELL ${s}`))});
-    svg.append(el("circle",{cx:CX,cy:CY,r:RD,fill:"none",stroke:"var(--muted)","stroke-width":.6,opacity:.45}));
-    svg.append(el("circle",{cx:CX,cy:CY,r:RC,fill:"none",stroke:"var(--muted)","stroke-dasharray":"1 7","stroke-linecap":"round","stroke-width":.8,opacity:.55}));
+    svg.append(el("circle",{cx:CX,cy:CY,r:RD,fill:"none",stroke:"var(--muted)","stroke-width":.9,opacity:.55}));
+    svg.append(el("circle",{cx:CX,cy:CY,r:RC,fill:"none",stroke:"var(--muted)","stroke-dasharray":"1 7","stroke-linecap":"round","stroke-width":1.2,opacity:.65}));
     [[RC,-.35],[RC,2.45],[SHELL(3),1.15],[SHELL(2),3.75],[SHELL(1),5.25],[RD,.3]].forEach(([r,a])=>{const p=polar(r,a);svg.append(arrow(p.x,p.y,-Math.sin(a),Math.cos(a),"var(--muted)",.75,.9,7))});
   }
   if(S.geo==="geo"&&CU.some(c=>c.bearing!=null)){
@@ -471,13 +607,13 @@ function drawWeb(){
   // spokes + pull arrows
   LN.forEach((d,i)=>{const a=angD(i),p0=polar(RCORE,a),p1=polar(390,a),w=.7+(T[d.id]||0)/maxT*3.4;
     const on=!anyFocus||focus==="d:"+d.id||(sel&&sel.d===d.id)||(focus&&focus.startsWith("c:")&&L.some(l=>l.d===d.id&&isOn(l)));
-    svg.append(el("line",{x1:p0.x,y1:p0.y,x2:p1.x,y2:p1.y,stroke:S.colorBy==="pillar"?pillarColor(d):"var(--spoke)","stroke-width":w,"stroke-linecap":"round",opacity:on?(S.colorBy==="pillar"?.8:.45):.07,class:"fade"}));
+    svg.append(el("line",{x1:p0.x,y1:p0.y,x2:p1.x,y2:p1.y,stroke:S.colorBy!=="culture"?pillarColor(d):"var(--spoke)","stroke-width":w,"stroke-linecap":"round",opacity:on?(S.colorBy!=="culture"?.8:.45):.07,class:"fade"}));
     const pa=polar(RCORE+20,a);svg.append(arrow(pa.x,pa.y,-Math.cos(a),-Math.sin(a),"var(--vermilion)",on?.9:.15,1.2,8))});
   const gT=el("g"),gP=el("g"),gL=el("g");svg.append(gT,gP);
   L.slice().sort((x,y)=>isOn(x)-isOn(y)).forEach(l=>{
     const c=byId(CU,l.c),lay=CL[l.c],cp=polar(lay.R,lay.a),p=pos.get(l),on=isOn(l),col=pointColor(l);
     const ctrl=S.threads==="curve"?polar((lay.R+SHELL(l.s))/2+20,lay.a):cp;
-    const r=(4+l.s*2.2)*S.pScale,op=on?(anyFocus?.95:.6):.06,sw=(0.4+l.s*.28)*S.tScale+(sel===l?.9:0);
+    const hy=l.k==="hyp",r=(4+l.s*2.2)*S.pScale*(hy?.8:1),op=(on?(anyFocus?.95:.6):.06)*(hy?.7:1),sw=(0.4+l.s*.28)*S.tScale+(sel===l?.9:0);
     const pt={l,base:{x:p.x,y:p.y},cp,ctrl,pr:r+3,off:{x:0,y:0},a:p.a};
     const g0=threadGeom(pt,0,0);
     const th=el("path",{d:g0.d,fill:"none",stroke:col,"stroke-width":sw,"stroke-linecap":"round",opacity:op,class:"fade"+(orbitFor===l?" keep":"")});
@@ -486,7 +622,7 @@ function drawWeb(){
     gT.append(th,ar);
     const g=el("g",{class:"hit pt fade"+(orbitFor===l?" keep":""),tabindex:0,role:"button","aria-label":`${l.t}. ${c.name}, ${byId(LN,l.d).name}, shell ${l.s}`,opacity:on?1:.12});
     g.append(el("circle",{cx:p.x,cy:p.y,r:r+3,fill:"var(--sheet)"}));
-    g.append(el("circle",{cx:p.x,cy:p.y,r,fill:l.k==="doc"?col:"var(--sheet)",stroke:col,"stroke-width":l.k==="doc"?1.5:2.5,"stroke-dasharray":l.k==="hyp"?"3 2.5":null}));
+    g.append(el("circle",{cx:p.x,cy:p.y,r,fill:l.k==="doc"?col:"var(--sheet)",stroke:hy?`color-mix(in srgb, ${col} 50%, var(--muted))`:col,"stroke-width":l.k==="doc"?1.5:2,"stroke-dasharray":hy?"2.5 2.5":null}));
     if(l.status!=="Approved")g.append(el("circle",{cx:p.x,cy:p.y,r:r+5,fill:"none",stroke:"var(--marigold)","stroke-width":2,"stroke-dasharray":"2 3"}));
     if(sel===l)g.append(el("circle",{cx:p.x,cy:p.y,r:r+7,fill:"none",stroke:"var(--ink)","stroke-width":2}));
     g.append(el("title",{},`${l.t} (${c.name} · ${byId(LN,l.d).name})`));
@@ -501,15 +637,21 @@ function drawWeb(){
     const g=el("g",{class:"hit fade",tabindex:0,role:"button","aria-label":`${d.name} lens. Click to focus`,opacity:dim?.3:1});
     g.append(el("circle",{cx:p.x,cy:p.y,r:9+(T[d.id]||0)/maxT*7,fill:"var(--sheet)",stroke:pillarColor(d),"stroke-width":4}));
     if(focus===key)g.append(el("circle",{cx:p.x,cy:p.y,r:22,fill:"none",stroke:"var(--ink)","stroke-width":2}));
-    const lp=polar(RD-48,a);g.append(el("text",{x:lp.x,y:lp.y+5,"text-anchor":"middle",class:"dlabel"},d.name));
+    const lp=polar(RD-48,a),pc=(PILLARS[d.pillar]||PILLARS.community).tok,dark=pc!=="--marigold";
+    const tw=d.name.length*(narrow()?11.6:document.documentElement.classList.contains("bigtype")?10.8:9)+12;g.append(el("rect",{x:lp.x-tw/2,y:lp.y-9,width:tw,height:18,fill:`var(${pc})`}));
+    g.append(el("text",{x:lp.x,y:lp.y+4.5,"text-anchor":"middle",class:"dlabel dtag",style:`fill:${dark?"#fff":"var(--ink)"}`},d.name));
     const act=()=>{if(editMode)return;focus=focus===key?null:key;sel=null;closeOrbit(true);render()};
     g.addEventListener("click",act);g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act()}});
     svg.append(g)});
   // core
-  svg.append(el("circle",{cx:CX,cy:CY,r:RCORE,fill:"var(--ink)",class:"fade"}));
-  svg.append(el("circle",{cx:CX,cy:CY,r:RCORE+6,fill:"none",stroke:"var(--vermilion)","stroke-width":3,class:"fade"}));
-  svg.append(el("text",{x:CX,y:CY+4,"text-anchor":"middle",style:"font:900 24px var(--f-display);font-stretch:125%;fill:var(--sheet)",class:"fade"},CORE.name.toUpperCase()));
-  svg.append(el("text",{x:CX,y:CY+24,"text-anchor":"middle",style:"font:12px var(--f-data);fill:var(--sheet);opacity:.8",class:"fade"},fmt(CORE.pop)));
+  const coreG=el("g",{class:"hit fade",tabindex:0,role:"button","aria-label":"Ayiti, the core. Click for what it shares","aria-pressed":coreOpen?"true":"false"});
+  coreG.append(el("circle",{cx:CX,cy:CY,r:RCORE,fill:"var(--ink)"}),el("circle",{cx:CX,cy:CY,r:RCORE+6,fill:"none",stroke:"var(--vermilion)","stroke-width":3}));
+  if(coreOpen)coreG.append(el("circle",{cx:CX,cy:CY,r:RCORE+13,fill:"none",stroke:"var(--ink)","stroke-width":2}));
+  coreG.append(el("text",{x:CX,y:CY+4,"text-anchor":"middle",style:"font:900 24px var(--f-display);font-stretch:125%;fill:var(--sheet)"},CORE.name.toUpperCase()));
+  coreG.append(el("text",{x:CX,y:CY+24,"text-anchor":"middle",style:"font:12px var(--f-data);fill:var(--sheet);opacity:.8"},fmt(CORE.pop)));
+  const coreAct=()=>{if(editMode)return;focus=null;sel=null;editing=false;closeOrbit(true);coreOpen=!coreOpen;render();if(coreOpen)ayitiPulse()};
+  coreG.addEventListener("click",coreAct);coreG.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();coreAct()}});
+  svg.append(coreG);
   // cultures
   CU.forEach(c=>{const lay=CL[c.id],a=lay.a,p=polar(lay.R,a),r=cR(c),key="c:"+c.id;
     const dim=anyFocus&&!(focus===key||(sel&&sel.c===c.id)||(focus&&focus.startsWith("d:")&&L.some(l=>l.c===c.id&&isOn(l))));
@@ -525,11 +667,17 @@ function drawWeb(){
     lines.forEach((t,k)=>g.append(el("text",{x:lx,y:ly0+k*22,"text-anchor":side,class:"clabel"},t)));
     const subTxt=S.radius==="walk"&&c.walk!=null?`${c.walk} min walk`:(c.pop?fmt(c.pop):"no population data yet");
     g.append(el("text",{x:lx,y:ly0+(lines.length-1)*22+19,"text-anchor":side,class:"csub"},S.momentum==="off"&&S.radius!=="walk"?(c.sub||""):subTxt));
+    if(focus===key){const mine=L.filter(l=>l.c===c.id),nl=new Set(mine.map(l=>l.d)).size;
+      const txt=`${mine.length} overlap${mine.length===1?"":"s"} · ${nl} lens${nl===1?"":"es"}`,w=txt.length*6.4+16,ty=side==="middle"&&sin<0?ly0-40:ly0+(lines.length-1)*22+30;
+      const tx=side==="start"?lx:side==="end"?lx-w:lx-w/2,tg=el("g",{class:"ctag"});
+      tg.append(el("rect",{x:tx,y:ty,width:w,height:18,fill:"var(--ink)"}),el("text",{x:tx+8,y:ty+13,class:"ctagt"},txt));g.append(tg)}
     cultureHandlers(g,c,key);
     svg.append(g)});
   svg.append(gL);
+  svg.append(el("g",{id:"fxLayer"}));
   svg.append(el("g",{id:"orbitLayer"}));
   if(orbitFor&&S.orbitMode!=="panel")drawOrbitInPlace();
+  if(focus&&focus.startsWith("c:")){if(focus!==lastPluck){lastPluck=focus;pluck(focus.slice(2),CL)}}else lastPluck=null;
 }
 
 // ============ interaction: click, focus, edit-mode dragging ============
@@ -555,7 +703,7 @@ function cultureHandlers(g,c,key){
   let drag=null;
   g.addEventListener("pointerdown",e=>{if(!(editMode&&can("owner")&&S.geo!=="geo"))return;e.preventDefault();g.setPointerCapture(e.pointerId);drag=svgPoint(e)});
   g.addEventListener("pointerup",async e=>{
-    if(!drag){if(!editMode){focus=focus===key?null:key;sel=null;closeOrbit(true);render()}return}
+    if(!drag){if(!editMode){coreOpen=false;focus=focus===key?null:key;sel=null;closeOrbit(true);render()}return}
     const q=svgPoint(e),moved=Math.hypot(q.x-drag.x,q.y-drag.y)>8;drag=null;if(!moved)return;
     const CU=cultures(),n=CU.length,ang=Math.atan2(q.y-CY,q.x-CX);
     let slot=Math.round(((ang+Math.PI/2-S.rotC*Math.PI/180)/(2*Math.PI))*n);slot=((slot%n)+n)%n;
@@ -571,7 +719,44 @@ function applyOffset(pt){
   const t=threadGeom(pt,pt.off.x,pt.off.y);pt.th.setAttribute("d",t.d);
   const a=arrow(t.ex,t.ey,t.tx,t.ty,pt.col,pt.op,pt.sw,7);pt.ar.setAttribute("d",a.getAttribute("d"));
 }
-function openPoint(l){sel=l;focus=null;editing=false;openOrbit(l)}
+function openPoint(l){coreOpen=false;sel=l;focus=null;editing=false;openOrbit(l)}
+
+// ============ culture focus: tension (threads ring like plucked strings, then settle taut) ============
+let lastPluck=null,pluckRAF=null,coreOpen=false,ayRAF=null;
+// Ayiti: a sonar pulse leaves the core through the shells, the threads ripple outward, the lenses light up in turn
+function ayitiPulse(){
+  if(reduced())return;
+  const fx=$("fxLayer");if(!fx)return;
+  [0,.28,.56].forEach((dl,i)=>{const e=el("circle",{cx:CX,cy:CY,r:RCORE+6,fill:"none",stroke:"var(--vermilion)","stroke-width":i?1:1.8,class:"cpulse",style:`--r0:${RCORE+6}px;--r1:${RC}px;animation-duration:1.6s;animation-delay:${dl}s`});fx.append(e);setTimeout(()=>e.remove(),(dl+1.8)*1000)});
+  lenses().forEach((d,i)=>{const p=polar(RD,angD(i));setTimeout(()=>{const e=el("circle",{cx:p.x,cy:p.y,r:12,fill:"none",stroke:pillarColor(d),"stroke-width":2,class:"cpulse",style:"--r0:12px;--r1:30px"});fx.append(e);setTimeout(()=>e.remove(),1300)},150+i*90)});
+  cancelAnimationFrame(ayRAF);const t0=performance.now();
+  const pts=PTS.map(pt=>{const dx=pt.base.x-CX,dy=pt.base.y-CY,dd=Math.hypot(dx,dy)||1;return{pt,c0:{...pt.ctrl},n:{x:-dy/dd,y:dx/dd},dl:dd*1.5,amp:Math.min(14,dd*.04)*(Math.random()<.5?-1:1)}});
+  const tick=t=>{let live=false;pts.forEach(o=>{const k=(t-t0-o.dl)/1000;if(k<0){live=true;return}
+      if(k>1.1){if(o.c0){o.pt.ctrl=o.c0;applyOffset(o.pt);o.c0=null}return}
+      live=true;const sag=o.amp*Math.exp(-k/.3)*Math.sin(k*Math.PI*2*2);o.pt.ctrl={x:o.c0.x+o.n.x*sag,y:o.c0.y+o.n.y*sag};applyOffset(o.pt)});
+    if(live)ayRAF=requestAnimationFrame(tick)};
+  ayRAF=requestAnimationFrame(tick);
+}
+function pluck(cid,CL){
+  if(reduced())return;
+  cancelAnimationFrame(pluckRAF);
+  const c=byId(D.cultures,cid),lay=CL[cid];if(!c||!lay)return;
+  const cp=polar(lay.R,lay.a),fx=$("fxLayer");
+  const pulse=(x,y,r0,r1,col,delay,w)=>{const e=el("circle",{cx:x,cy:y,r:r0,fill:"none",stroke:col,"stroke-width":w||1.4,class:"cpulse",style:`--r0:${r0}px;--r1:${r1}px;animation-delay:${delay}s`});fx.append(e);setTimeout(()=>e.remove(),(delay+1.3)*1000)};
+  const r=cR(c);pulse(cp.x,cp.y,r+2,r+30,c.color,0,1.6);pulse(cp.x,cp.y,r+2,r+30,c.color,.22,1);
+  const pts=PTS.filter(p=>p.l.c===cid).sort((a,b)=>Math.hypot(a.base.x-cp.x,a.base.y-cp.y)-Math.hypot(b.base.x-cp.x,b.base.y-cp.y));
+  const t0=performance.now(),DUR=1250;
+  pts.forEach((pt,i)=>{pt.c0={...pt.ctrl};const dx=pt.base.x-cp.x,dy=pt.base.y-cp.y,L0=Math.hypot(dx,dy)||1;
+    pt.nrm={x:-dy/L0,y:dx/L0};pt.amp=Math.min(26,L0*.09)*(i%2?-1:1);pt.dl=i*55;
+    const pr=(4+pt.l.s*2.2)*S.pScale;setTimeout(()=>pulse(pt.base.x+pt.off.x,pt.base.y+pt.off.y,pr+2,pr+14,pt.col,0,1.2),pt.dl+120)});
+  const tick=t=>{let live=false;
+    pts.forEach(pt=>{const k=(t-t0-pt.dl)/1000;if(k<0){live=true;return}
+      if(k*1000>DUR){if(pt.c0){pt.ctrl={...pt.c0};applyOffset(pt);pt.c0=null}return}
+      live=true;const sag=pt.amp*Math.exp(-k/.32)*Math.cos(k*Math.PI*2*2.1);
+      pt.ctrl={x:pt.c0.x+pt.nrm.x*sag,y:pt.c0.y+pt.nrm.y*sag};applyOffset(pt)});
+    if(live)pluckRAF=requestAnimationFrame(tick)};
+  pluckRAF=requestAnimationFrame(tick);
+}
 
 // ============ cursor gravity ============
 let mouse=null,gravRAF=null;
@@ -593,7 +778,7 @@ function startGravity(){
 }
 
 // ============ an overlap's own orbit (zoom / in place / panel) ============
-const BASEVB=[-230,-40,1460,1080];let vb=[...BASEVB],vbAnim=null,orbRAF=null,actx=null,audioEl=null;
+const BASEVB_=[-230,-40,1460,1080],BASEVB_PHONE=[-400,-70,1800,1190];const BASEVB=()=>[...(narrow()?BASEVB_PHONE:BASEVB_)];let orbIntro=0;let vb=[...BASEVB()],vbAnim=null,orbRAF=null,actx=null,audioEl=null;
 function setVB(v){vb=v;$("web").setAttribute("viewBox",v.join(" "))}
 function animVB(to,ms=450,done){
   cancelAnimationFrame(vbAnim);const from=[...vb],t0=performance.now();
@@ -602,15 +787,15 @@ function animVB(to,ms=450,done){
   vbAnim=requestAnimationFrame(step);
 }
 function openOrbit(l){
-  orbitFor=l;render();
+  orbIntro=performance.now();orbitFor=l;render();
   if(S.orbitMode==="panel"){openPanelOrbit(l);return}
   $("web").classList.add("orbiting");
-  if(S.orbitMode==="zoom"){const pt=PTS.find(p=>p.l===l);if(pt){const w=BASEVB[2]/2.3,h=BASEVB[3]/2.3;animVB([pt.base.x-w/2,pt.base.y-h/2,w,h])}}
+  if(S.orbitMode==="zoom"){const pt=PTS.find(p=>p.l===l);if(pt){const w=BASEVB()[2]/2.3,h=BASEVB()[3]/2.3;animVB([pt.base.x-w/2,pt.base.y-h/2,w,h])}}
 }
 function closeOrbit(silent){
   if(!orbitFor&&$("lens").hidden)return;
   orbitFor=null;cancelAnimationFrame(orbRAF);$("lens").hidden=true;$("web").classList.remove("orbiting");
-  if(vb.join()!==BASEVB.join())animVB(BASEVB);
+  if(vb.join()!==BASEVB().join())animVB(BASEVB());
   if(!silent)render();
 }
 function media(l){
@@ -621,7 +806,8 @@ function media(l){
 function tileNode(m,col,w,h,patId){
   const g=el("g",{class:"orb"});
   if(m.url){const cid=uid("c");const cp=el("clipPath",{id:cid});cp.append(el("rect",{x:-w/2,y:-h/2,width:w,height:h,rx:2}));g.append(cp);
-    const im=el("image",{x:-w/2,y:-h/2,width:w,height:h,preserveAspectRatio:"xMidYMid slice","clip-path":`url(#${cid})`});im.setAttribute("href",m.url);g.append(im)}
+    const im=el("image",{x:-w/2,y:-h/2,width:w,height:h,preserveAspectRatio:"xMidYMid slice","clip-path":`url(#${cid})`});im.setAttribute("href",m.url);
+    const a=el("a",{href:m.url,target:"_blank",rel:"noopener","aria-label":"Open photo: "+m.cap});a.append(im);g.append(a)}
   else{g.append(el("rect",{x:-w/2,y:-h/2,width:w,height:h,rx:2,fill:`url(#${patId})`}));g.append(el("text",{x:-w/2+4,y:-h/2+9,class:"tslot"},"PHOTO"))}
   g.append(el("rect",{x:-w/2,y:-h/2,width:w,height:h,rx:2,fill:"none",stroke:col,"stroke-width":.8}));
   g.append(el("text",{x:0,y:h/2+11,"text-anchor":"middle",class:"tcap"},m.cap));
@@ -651,19 +837,72 @@ function runOrbit(items,rings,place,host){
 }
 function drawOrbitInPlace(){
   const l=orbitFor,pt=PTS.find(p=>p.l===l);if(!pt)return;
-  const layer=$("orbitLayer"),col=pt.col,O=pt.base,patId="hatchP";
-  const defs=el("defs"),pat=el("pattern",{id:patId,width:5,height:5,patternUnits:"userSpaceOnUse",patternTransform:"rotate(45)"});
-  pat.append(el("line",{x1:0,y1:0,x2:0,y2:5,stroke:col,"stroke-width":.8,opacity:.4}));defs.append(pat);layer.append(defs);
+  const layer=$("orbitLayer"),col=pt.col,O=pt.base,patId="hatchP",R0=128;
+  const c=byId(D.cultures,l.c),d=byId(D.lenses,l.d),lay=cultureLayout()[l.c];
+  const fresh=!reduced()&&performance.now()-orbIntro<1200;      // animate only on the first draw after opening
+  const A=(e,cls,dl)=>{if(fresh){e.classList.add(cls);if(dl!=null)e.style.animationDelay=dl+"s"}return e};
+  const pp=(r,a)=>({x:O.x+r*Math.cos(a),y:O.y+r*Math.sin(a)});
+  const defs=el("defs"),pat=el("pattern",{id:patId,width:4.5,height:4.5,patternUnits:"userSpaceOnUse",patternTransform:"rotate(45)"});
+  pat.append(el("line",{x1:0,y1:0,x2:0,y2:4.5,stroke:col,"stroke-width":.9,opacity:.55}));
+  const clipId=uid("oc"),cp=el("clipPath",{id:clipId});cp.append(el("circle",{cx:O.x,cy:O.y,r:R0}));defs.append(pat,cp);layer.append(defs);
+  // sheet behind the chart, so the web recedes (the bank chart's clean field)
+  layer.append(A(el("circle",{cx:O.x,cy:O.y,r:R0,fill:"var(--sheet)",opacity:.94}),"o-fade",0));
+  // faint grid inside the circle
+  const grid=el("g",{"clip-path":`url(#${clipId})`,opacity:.55});
+  for(let k=-R0;k<=R0;k+=14){grid.append(el("line",{x1:O.x-R0,y1:O.y+k,x2:O.x+R0,y2:O.y+k,stroke:"var(--rule)","stroke-width":.45}),el("line",{x1:O.x+k,y1:O.y-R0,x2:O.x+k,y2:O.y+R0,stroke:"var(--rule)","stroke-width":.45}))}
+  layer.append(A(grid,"o-fade",.15));
+  // two zones, layered like the bank chart: culture side (light fill + hatch) and Ayiti side (light vermilion)
+  const toC=lay?Math.atan2(polar(lay.R,lay.a).y-O.y,polar(lay.R,lay.a).x-O.x):0, toA=Math.atan2(CY-O.y,CX-O.x);
+  const wedge=(a,span)=>{const p0=pp(R0,a-span),p1=pp(R0,a+span);return `M${O.x},${O.y} L${p0.x},${p0.y} A${R0},${R0} 0 0 1 ${p1.x},${p1.y} Z`};
+  const zone=(a,span,fillCol,hatch,label,dl)=>{const g=el("g",{"clip-path":`url(#${clipId})`});
+    g.append(el("path",{d:wedge(a,span),fill:fillCol,opacity:.13}));
+    if(hatch)g.append(el("path",{d:wedge(a,span),fill:`url(#${patId})`}));
+    const e0=pp(-R0,a),e1=pp(R0,a);g.append(el("line",{x1:e0.x,y1:e0.y,x2:e1.x,y2:e1.y,stroke:fillCol,"stroke-width":1.1,opacity:.9}));
+    let deg=a*180/Math.PI;const flip=Math.cos(a)<0;const tp=pp(R0*.84,a);
+    g.append(el("text",{x:tp.x,y:tp.y-3,"text-anchor":"middle",class:"ozone",fill:fillCol,transform:`rotate(${flip?deg+180:deg} ${tp.x} ${tp.y})`},label));
+    g.style.transformOrigin=`${O.x}px ${O.y}px`;g.style.transformBox="view-box";
+    layer.append(A(g,"o-grow",dl))};
+  zone(toA,.42,"var(--vermilion)",false,"TOWARD AYITI",.25);
+  zone(toC,.55,col,true,"TOWARD "+(c?.name||"").toUpperCase(),.35);
+  // the main ring, ticks and heavy bracket arcs
+  const ring=el("circle",{cx:O.x,cy:O.y,r:R0,fill:"none",stroke:"var(--ink)","stroke-width":1.15,pathLength:1000});
+  if(fresh){ring.style.strokeDasharray=1000;ring.style.strokeDashoffset=1000;ring.classList.add("o-draw")}
+  layer.append(ring);
+  for(let deg=0;deg<360;deg+=5){const a=deg*Math.PI/180,big=deg%30===0,p0=pp(R0,a),p1=pp(R0-(big?7:3),a);
+    layer.append(A(el("line",{x1:p0.x,y1:p0.y,x2:p1.x,y2:p1.y,stroke:"var(--ink)","stroke-width":big?.9:.5}),"o-fade",.25+deg/360*.55))}
+  const groups=[
+    {at:Math.PI*1.12,items:[c?.name||"",`↔ ${CORE.name}`,`${d?.name||""} lens`,(PILLARS[d?.pillar]||{}).name||""]},
+    {at:-Math.PI*.12,items:[`Shell ${l.s} of 3`,l.k==="doc"?"Documented":"Hypothesis",l.status==="Approved"?"In the catalog":"Awaiting review"]}];
+  const step=.135;let li=0;
+  groups.forEach(g=>{const n=g.items.length,a0=g.at-step*(n-1)/2-.06,a1=g.at+step*(n-1)/2+.06,q0=pp(R0+3,a0),q1=pp(R0+3,a1);
+    const arc=el("path",{d:`M${q0.x},${q0.y} A${R0+3},${R0+3} 0 0 1 ${q1.x},${q1.y}`,fill:"none",stroke:"var(--ink)","stroke-width":3.4,pathLength:100});
+    if(fresh){arc.style.strokeDasharray=100;arc.style.strokeDashoffset=100;arc.classList.add("o-draw");arc.style.animationDelay=".55s"}
+    layer.append(arc);
+    g.items.forEach((t,k)=>{const kk=Math.cos(g.at)<0?n-1-k:k,a=g.at+(kk-(n-1)/2)*step,flip=Math.cos(a)<0,q=pp(R0+11,a),deg=a*180/Math.PI;
+      layer.append(A(el("text",{x:q.x,y:q.y,"dominant-baseline":"middle","text-anchor":flip?"end":"start",class:"oradial",transform:`rotate(${flip?deg+180:deg} ${q.x} ${q.y})`},t),"o-fade",.7+li++*.06))})});
+  // title block, top left of the circle (the bank chart's heading)
+  const tx=O.x-R0-6,ty=O.y-R0-30;
+  layer.append(A(el("text",{x:tx,y:ty,class:"otitle",fill:col},l.t),"o-fade",.45));
+  layer.append(A(el("text",{x:tx,y:ty+13,class:"osub"},`${c?.name||""} ↔ ${CORE.name} · ${d?.name||""}`),"o-fade",.55));
+  // the two media orbits, in the point's color
   const rings=[{r:58,v:.12},{r:104,v:-.07}];
-  rings.forEach((g,i)=>{layer.append(el("circle",{cx:O.x,cy:O.y,r:g.r,fill:"none",stroke:"var(--muted)","stroke-dasharray":"2 4","stroke-width":.6,opacity:.7}));
-    const a=.8+i*2.2,sg=Math.sign(g.v);layer.append(arrow(O.x+g.r*Math.cos(a),O.y+g.r*Math.sin(a),-Math.sin(a)*sg,Math.cos(a)*sg,"var(--muted)",.8,.7,5))});
-  layer.append(el("path",{d:`M${O.x-26},${O.y} h7 M${O.x+19},${O.y} h7 M${O.x},${O.y-26} v7 M${O.x},${O.y+19} v7`,stroke:"var(--ink)","stroke-width":.8}));
+  rings.forEach((g,i)=>{layer.append(A(el("circle",{cx:O.x,cy:O.y,r:g.r,fill:"none",stroke:col,"stroke-dasharray":"2 4","stroke-width":1,opacity:.85}),"o-fade",.3+i*.1));
+    const a=.8+i*2.2,sg=Math.sign(g.v);layer.append(A(arrow(O.x+g.r*Math.cos(a),O.y+g.r*Math.sin(a),-Math.sin(a)*sg,Math.cos(a)*sg,col,.9,.9,5),"o-fade",.5))});
+  layer.append(el("path",{d:`M${O.x-26},${O.y} h7 M${O.x+19},${O.y} h7 M${O.x},${O.y-26} v7 M${O.x},${O.y+19} v7`,stroke:"var(--ink)","stroke-width":.9}));
+  // the point itself, redrawn on top
+  const r=(4+l.s*2.2)*S.pScale;
+  layer.append(el("circle",{cx:O.x,cy:O.y,r:r+3,fill:"var(--sheet)"}),
+    A(el("circle",{cx:O.x,cy:O.y,r,fill:l.k==="doc"?col:"var(--sheet)",stroke:col,"stroke-width":l.k==="doc"?1.5:2.5,"stroke-dasharray":l.k==="hyp"?"3 2.5":null,style:`transform-origin:${O.x}px ${O.y}px;transform-box:view-box`}),"o-pop",0));
   const M=media(l),items=[];
-  M.slice(0,3).forEach((m,i)=>items.push({g:tileNode(m,col,40,30,patId),ring:0,a:i*2*Math.PI/3}));
-  M.slice(3).forEach((m,i)=>items.push({g:tileNode(m,col,40,30,patId),ring:1,a:.5+i*Math.PI/2}));
-  items.push({g:soundNode(l,13,"tcap"),ring:1,a:.5+3*Math.PI/2});
+  M.slice(0,3).forEach((m,i)=>items.push({g:tileNode(m,col,40,30,patId),ring:0,a:i*2*Math.PI/3,dl:.45+i*.08}));
+  M.slice(3).forEach((m,i)=>items.push({g:tileNode(m,col,40,30,patId),ring:1,a:.5+i*Math.PI/2,dl:.6+i*.08}));
+  items.push({g:soundNode(l,13,"tcap"),ring:1,a:.5+3*Math.PI/2,dl:.85});
   items.forEach(it=>layer.append(it.g));
-  const place=()=>items.forEach(it=>{const r=rings[it.ring].r;it.g.setAttribute("transform",`translate(${O.x+r*Math.cos(it.a)},${O.y+r*Math.sin(it.a)})`)});
+  const t0=performance.now();
+  const ease=k=>{const c1=1.5,c3=c1+1;return 1+c3*Math.pow(k-1,3)+c1*Math.pow(k-1,2)};   // ease-out-back: overshoots a little
+  const place=()=>{const now=performance.now();items.forEach(it=>{
+    const k=fresh?Math.max(0,Math.min(1,(now-t0-it.dl*1000)/650)):1, e=fresh?ease(k):1, r=rings[it.ring].r*e;
+    it.g.setAttribute("transform",`translate(${O.x+r*Math.cos(it.a)},${O.y+r*Math.sin(it.a)})`);it.g.setAttribute("opacity",fresh?Math.min(1,k*2.5):1)})};
   runOrbit(items,rings,place,layer);
 }
 function openPanelOrbit(l){
@@ -672,7 +911,7 @@ function openPanelOrbit(l){
   const defs=el("defs"),pat=el("pattern",{id:"hatchL",width:7,height:7,patternUnits:"userSpaceOnUse",patternTransform:"rotate(45)"});
   pat.append(el("line",{x1:0,y1:0,x2:0,y2:7,stroke:col,"stroke-width":1.2,opacity:.35}));defs.append(pat);svg.append(defs);
   const rings=[{r:132,v:.11},{r:248,v:-.065},{r:345,v:.035}];
-  rings.forEach((g,i)=>{svg.append(el("circle",{cx:O,cy:O,r:g.r,fill:"none",stroke:"var(--muted)","stroke-dasharray":"2 5","stroke-width":.8,opacity:.6}));
+  rings.forEach((g,i)=>{svg.append(el("circle",{cx:O,cy:O,r:g.r,fill:"none",stroke:"var(--muted)","stroke-dasharray":"2 5","stroke-width":1.2,opacity:.75}));
     [.6+i,3.4+i].forEach(a=>{const sg=Math.sign(g.v);svg.append(arrow(O+g.r*Math.cos(a),O+g.r*Math.sin(a),-Math.sin(a)*sg,Math.cos(a)*sg,"var(--muted)",.8,.9,7))})});
   svg.append(el("path",{d:`M${O-46},${O} h12 M${O+34},${O} h12 M${O},${O-46} v12 M${O},${O+34} v12`,stroke:"var(--ink)","stroke-width":1}));
   svg.append(el("circle",{cx:O,cy:O,r:18,fill:l.k==="doc"?col:"var(--sheet)",stroke:col,"stroke-width":2,"stroke-dasharray":l.k==="hyp"?"3 2.5":null}));
@@ -694,13 +933,38 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")closeOrbit()});
 
 // ============ matrix, legend ============
 function drawLegend(){
-  const sw=(fill,stroke,dash)=>`<svg width="16" height="16"><circle cx="8" cy="8" r="6" fill="${fill}" stroke="${stroke}" stroke-width="2"${dash?' stroke-dasharray="3 2"':''}/></svg>`;
-  let h=`<span><svg width="30" height="10"><path d="M2,5 H26 M20,1 L26,5 L20,9" fill="none" stroke="var(--ink)" stroke-width="1"/></svg>Culture grounding onto an overlap</span><span><svg width="20" height="10"><path d="M14,1 L6,5 L14,9" fill="none" stroke="var(--vermilion)" stroke-width="1.2"/></svg>Pull toward the core</span><span>${sw("var(--ink)","var(--ink)")}Documented</span><span>${sw("var(--sheet)","var(--ink)",1)}Hypothesis</span><span>Shell 3 = strongest${S.shellOrder==="in"?", closest to the core":", farthest out"}</span><span>Spoke width = bridge score</span>`;
-  if(S.momentum!=="off")h+=`<span>Culture size = population · dashed = no data yet</span>`;
-  if(S.radius==="walk")h+=`<span>Distance = walking minutes from the plaza</span>`;
-  if(S.colorBy==="pillar")h+=Object.values(PILLARS).map(p=>`<span><i class="dot" style="background:var(${p.tok})"></i>${p.name}</span>`).join("");
-  if(editMode)h+=`<span><svg width="16" height="16"><circle cx="8" cy="8" r="6" fill="none" stroke="var(--marigold)" stroke-width="2" stroke-dasharray="2 3"/></svg>Not yet approved</span>`;
-  $("legend").innerHTML=h;
+  // "How to read it?" — a small labelled diagram (after the banks chart), plus the color key and live notes
+  const ink="var(--ink)",mu="var(--muted)",cc="var(--teal)",shell=S.shellOrder==="in";
+  const lab=(x,y,t,anc="start")=>`<text x="${x}" y="${y}" text-anchor="${anc}" class="hlab">${t}</text>`;
+  const svg=`<svg class="howsvg" viewBox="0 0 560 150" role="img" aria-label="How to read the diagram">
+    <path d="M330 2 A150 150 0 0 0 330 148" fill="none" stroke="${mu}" stroke-width="1.1" stroke-dasharray="2 5"/>
+    <path d="M400 18 A90 90 0 0 0 400 132" fill="none" stroke="${mu}" stroke-width="1.1" stroke-dasharray="2 5"/>
+    <line x1="210" y1="75" x2="474" y2="75" stroke="var(--teal)" stroke-width="2.6" stroke-linecap="round" opacity=".8"/>
+    <path d="M488 70 L480 75 L488 80" fill="none" stroke="var(--vermilion)" stroke-width="1.3"/>
+    <circle cx="512" cy="75" r="22" fill="${ink}"/><circle cx="512" cy="75" r="26" fill="none" stroke="var(--vermilion)" stroke-width="2.4"/>
+    <text x="512" y="79" text-anchor="middle" style="font:900 10px var(--f-display);font-stretch:125%;fill:var(--sheet)">AYITI</text>
+    <circle cx="232" cy="75" r="7" fill="var(--sheet)" stroke="var(--teal)" stroke-width="3"/>
+    <rect x="206" y="88" width="52" height="15" fill="var(--teal)"/><text x="232" y="99" text-anchor="middle" style="font:800 8.5px var(--f-display);font-stretch:125%;fill:#fff;letter-spacing:.04em">LENS</text>
+    <circle cx="44" cy="52" r="15" fill="var(--green)"/>
+    <path d="M58 48 Q200 4 386 70" fill="none" stroke="var(--green)" stroke-width="1.2"/><path d="M379 63 L387 70 L377 72" fill="none" stroke="var(--green)" stroke-width="1.2"/>
+    <path d="M58 58 Q170 120 318 80" fill="none" stroke="var(--green)" stroke-width=".9" stroke-dasharray="4 4" opacity=".7"/>
+    <circle cx="398" cy="75" r="9" fill="var(--green)" stroke="var(--green)" stroke-width="1.5"/>
+    <circle cx="328" cy="75" r="5.5" fill="var(--sheet)" stroke="color-mix(in srgb, var(--green) 50%, var(--muted))" stroke-width="2" stroke-dasharray="2.5 2.5"/>
+    ${lab(44,82,"Culture","middle")}${lab(44,94,"size = population","middle")}
+    ${lab(150,18,"Thread: the culture grounds","middle")}${lab(150,30,"onto an overlap","middle")}
+    ${lab(412,104,"Documented","middle")}${lab(412,116,shell?"shell 3, strongest":"strongest shell","middle")}
+    ${lab(318,44,"Hypothesis","middle")}${lab(318,56,"to test in fieldwork","middle")}
+    ${lab(232,122,"Spoke width =","middle")}${lab(232,134,"bridge score","middle")}
+    ${lab(470,20,"Pull toward","middle")}${lab(470,32,"the core","middle")}
+  </svg>`;
+  let notes=[];
+  if(S.colorBy==="blend")notes.push(`<span>Spoke color = pillar · dot and thread color = culture</span>`);
+  if(S.colorBy!=="culture")notes.push(Object.values(PILLARS).map(p=>`<span><i class="dot" style="background:var(${p.tok})"></i>${p.name}</span>`).join(""));
+  notes.push(`<span>Shell 3 = strongest${shell?", closest to the core":", farthest out"}</span>`);
+  if(S.momentum!=="off")notes.push(`<span>Dashed culture = no population data yet</span>`);
+  if(S.radius==="walk")notes.push(`<span>Distance = walking minutes from the plaza</span>`);
+  if(editMode)notes.push(`<span><svg width="16" height="16"><circle cx="8" cy="8" r="6" fill="none" stroke="var(--marigold)" stroke-width="2" stroke-dasharray="2 3"/></svg>Not yet approved</span>`);
+  $("legend").innerHTML=`<div class="howto"><h3 class="howh">How to read it?</h3>${svg}<div class="hownotes">${notes.join("")}</div></div>`;
 }
 function drawMatrix(){
   const T=totals(),box=$("matrix"),L=visible(),LN=lenses();
@@ -734,13 +998,14 @@ function drawDetail(){
       <label>Evidence<select id="eK">${["documented","hypothesis","confirm source"].map(v=>`<option${v===l.evidence?" selected":""}>${v}</option>`).join("")}</select></label>
       <label class="full">What overlaps<textarea id="eN" maxlength="1500">${esc(l.n)}</textarea></label>
       <label class="full">Design cue<textarea id="eQ" maxlength="800" style="min-height:50px">${esc(l.q)}</textarea></label>
+      <label class="full">Photos · paste links, one per line (Dropbox, Google Drive or any image link, up to 6)<textarea id="ePh" maxlength="3000" style="min-height:64px" placeholder="https://www.dropbox.com/scl/fi/…">${esc(l.photoLinks||"")}</textarea></label>
       <label class="full">Media credit<input id="eCr" maxlength="400" value="${esc(l.credit||"")}"></label>
       <label>Status<select id="eSt">${["Approved","Submitted","Hidden"].map(v=>`<option${v===l.status?" selected":""}>${v}</option>`).join("")}</select></label>
       <div class="row full"><button class="btn" id="eSave" type="button">Save</button><button class="btn" id="eCancel" type="button">Cancel</button></div>
-      ${MODE==="live"?`<p class="note full">Add photos and a sound clip on this row in Notion (photos, sound columns). They appear in its orbit.</p>`:""}
+      <p class="note full">Photos fill the orbit's slots in order: ${["culture","Haitian","at Newkirk Plaza","object or material","archive or source","fieldwork"].join(", ")}. You can also upload files on this row in Notion (photos column) and a sound clip (sound column).</p>
     </div>`;
-    $("eSave").onclick=()=>{const f={title:$("eT").value.trim()||l.t,c:$("eC").value,d:$("eD").value,s:+$("eS").value,evidence:$("eK").value,n:$("eN").value.trim(),q:$("eQ").value.trim(),credit:$("eCr").value.trim(),status:$("eSt").value};
-      editing=false;write("update",{id:l.id,fields:f},()=>Object.assign(l,{t:f.title,c:f.c,d:f.d,s:f.s,evidence:f.evidence,k:f.evidence==="documented"?"doc":"hyp",n:f.n,q:f.q,credit:f.credit,status:f.status}),"Saved")};
+    $("eSave").onclick=()=>{const f={title:$("eT").value.trim()||l.t,c:$("eC").value,d:$("eD").value,s:+$("eS").value,evidence:$("eK").value,n:$("eN").value.trim(),q:$("eQ").value.trim(),credit:$("eCr").value.trim(),status:$("eSt").value,photoLinks:$("ePh").value.trim()};
+      editing=false;write("update",{id:l.id,fields:f},()=>Object.assign(l,{t:f.title,c:f.c,d:f.d,s:f.s,evidence:f.evidence,k:f.evidence==="documented"?"doc":"hyp",n:f.n,q:f.q,credit:f.credit,status:f.status,photoLinks:f.photoLinks,photos:imgLinks(f.photoLinks)}),"Saved")};
     $("eCancel").onclick=()=>{editing=false;render()};
     return;
   }
@@ -768,11 +1033,28 @@ function drawDetail(){
       b.onclick=()=>openPoint(l);li.append(b);$("fl").append(li)});
     return;
   }
+  if(coreOpen){
+    const T=totals(),LN=lenses().slice().sort((a,b)=>(T[b.id]||0)-(T[a.id]||0)),mx=Math.max(1,...Object.values(T));
+    const A=D.connectors.filter(l=>l.status==="Approved"),docs=A.filter(l=>l.k==="doc").length,cs=new Set(A.map(l=>l.c)).size;
+    const strong=A.filter(l=>l.s===3).sort((a,b)=>(a.k==="doc"?0:1)-(b.k==="doc"?0:1));
+    p.innerHTML=`<p class="eyebrow">The core</p><h2>Ayiti</h2>
+      <p class="note" style="margin-top:0">Haitian Flatbush, ${fmt(CORE.pop)} (placeholder until QGIS). Everything on the map is measured by what it shares with this center.</p>
+      <div class="aystats"><div><b>${A.length}</b><span>overlaps</span></div><div><b>${docs}</b><span>documented</span></div><div><b>${cs}/${cultures().length}</b><span>cultures linked</span></div></div>
+      <p class="eyebrow" style="margin-top:12px">Lenses by bridge score</p>
+      <div class="aybars">${LN.map(d=>`<div class="aybar"><span>${esc(d.name)}</span><i style="width:${Math.round((T[d.id]||0)/mx*100)}%;background:${pillarColor(d)}"></i><em>${T[d.id]||0}</em></div>`).join("")}</div>
+      <p class="eyebrow" style="margin-top:12px">Strongest overlaps (shell 3)</p><ul class="list" id="ayl"></ul>
+      <div class="row" style="margin-top:10px"><button class="btn" id="ayClose" type="button">Close</button></div>`;
+    strong.forEach(l=>{const li=document.createElement("li"),b=document.createElement("button");b.className="item";
+      b.innerHTML=`<i class="dot" style="background:${pointColor(l)}"></i><span class="t">${esc(l.t)}</span><span class="m">${esc(byId(D.cultures,l.c)?.name)} · ${esc(byId(D.lenses,l.d)?.name)}${l.k==="hyp"?" ?":""}</span>`;
+      b.onclick=()=>{coreOpen=false;openPoint(l)};li.append(b);$("ayl").append(li)});
+    $("ayClose").onclick=()=>{coreOpen=false;render()};
+    return;
+  }
   const T=totals(),top=lenses().slice().sort((a,b)=>(T[b.id]||0)-(T[a.id]||0)).slice(0,3).map(d=>d.name);
   const n=D.connectors.filter(l=>l.status==="Approved").length,docs=D.connectors.filter(l=>l.status==="Approved"&&l.k==="doc").length;
   p.innerHTML=`<p class="eyebrow">How to read it</p><h2>A central-force system</h2>
     <p><b>Core:</b> Ayiti, the attractor. <b>Spokes:</b> the shared lenses, wider where more cultures overlap. <b>Charge points:</b> where a culture grounds onto a spoke. <b>Shells 1–3:</b> how strong that overlap is. <b>Outer orbit:</b> the cultures, sized by population, their momentum.</p>
-    <p class="note">${n} overlaps · ${docs} documented, ${n-docs} hypotheses · ${cultures().length} cultures · ${lenses().length} lenses. Strongest spokes: <b>${top.join(", ")}</b>. Click a point to open its own orbit.</p>`;
+    <p class="note">${n} overlaps · ${docs} documented, ${n-docs} hypotheses · ${cultures().length} cultures · ${lenses().length} lenses. Strongest spokes: <b>${top.join(", ")}</b>. Tap or click a dot to open its story.</p>`;
 }
 function drawQueue(){
   const show=can("editor")&&(MODE==="live"||editMode);$("queuePanel").hidden=!show;if(!show)return;
@@ -810,7 +1092,7 @@ function drawChrome(){
   $("editToggle").hidden=!can("editor");$("editToggle").setAttribute("aria-pressed",editMode);
   $("board").classList.toggle("editing",editMode);$("editHint").hidden=!editMode;
   $("addPanel").hidden=!can("editor");
-  $("iterPanel").hidden=!can("editor");$("itDefaultWrap").hidden=!can("owner");
+  $("iterPanel").hidden=!can("editor");$("setHome").hidden=!can("owner");$("itDefaultWrap").hidden=!can("owner");
   $("itList").innerHTML=(MODE==="live"?ITERS:JSON.parse(tryLS("lakou-iters")||"[]")).map(i=>`<option value="${esc(i.id)}">${esc(i.name)}${i.isDefault?" (visitors see this)":""}</option>`).join("")||"<option value=''>No saved views yet</option>";
   $("submitNote").textContent=MODE==="live"?"Tell us a practice your culture shares with Haitian culture. It appears after review.":"Preview of the visitor form. In the hosted version this goes to the Notion review queue.";
   $("signInBox").hidden=MODE!=="live";$("signOut").hidden=!(MODE==="live"&&KEY);$("signIn").hidden=MODE==="live"&&!!KEY;
@@ -822,7 +1104,22 @@ function drawChrome(){
 function render(){
   $("web").hidden=view!=="web";$("matrix").hidden=view!=="matrix";
   $("vWeb").setAttribute("aria-pressed",view==="web");$("vMatrix").setAttribute("aria-pressed",view==="matrix");
-  view==="web"?drawWeb():drawMatrix();drawLegend();drawDetail();drawQueue();drawChrome();
+  view==="web"?drawWeb():drawMatrix();drawLegend();drawDetail();drawQueue();drawChrome();syncBack();phoneZoom();
+}
+function syncBack(){const b=$("backBtn");const any=!!(orbitFor||focus||sel||coreOpen);b.hidden=!any||view!=="web";
+  b.textContent=orbitFor?"← Back to the whole map":"← Show everything"}
+let lastZoom=null;
+function phoneZoom(){
+  if(!narrow()||orbitFor||view!=="web"){lastZoom=null;return}
+  const key=focus||(coreOpen?"core":null);if(key===lastZoom)return;lastZoom=key;
+  if(!focus){if(vb.join()!==BASEVB().join())animVB(BASEVB());return}
+  const isC=focus.startsWith("c:"),id=focus.slice(2),pts=PTS.filter(p=>isC?p.l.c===id:p.l.d===id).map(p=>p.base);
+  if(isC&&CL[id])pts.push(polar(CL[id].R,CL[id].a));
+  if(!isC){const i=lenses().findIndex(d=>d.id===id);if(i>=0)pts.push(polar(RD,angD(i)))}
+  pts.push({x:CX,y:CY});
+  let x0=Math.min(...pts.map(p=>p.x))-270,x1=Math.max(...pts.map(p=>p.x))+270,y0=Math.min(...pts.map(p=>p.y))-90,y1=Math.max(...pts.map(p=>p.y))+90;
+  const ar=BASEVB()[2]/BASEVB()[3];let w=Math.max(x1-x0,(y1-y0)*ar,520),h=w/ar;const cx=(x0+x1)/2,cy=(y0+y1)/2;
+  animVB([cx-w/2,cy-h/2,w,h]);
 }
 function renderAll(){fillSelects();drawCatalog();render()}
 
@@ -831,8 +1128,41 @@ const CTL=["orbitMode","gravity","geo","radius","colorBy","labels","momentum","t
 const syncCtl=()=>CTL.forEach(k=>$(k).value=S[k]);
 CTL.forEach(k=>$(k).addEventListener("input",()=>{const i=$(k);S[k]=i.type==="range"?+i.value:i.value;saveSet();if(k==="orbitMode")closeOrbit(true);render()}));
 $("vWeb").onclick=()=>{view="web";render()};$("vMatrix").onclick=()=>{view="matrix";closeOrbit(true);render()};
-$("clearFocus").onclick=()=>{focus=null;sel=null;editing=false;closeOrbit()};
-$("resetView").onclick=()=>{S=clone(DEF_SET);syncCtl();saveSet();closeOrbit(true);render();toast("Display reset")};
+setVB(BASEVB());
+let rsz;addEventListener("resize",()=>{clearTimeout(rsz);rsz=setTimeout(()=>{if(!orbitFor&&!focus){vb=BASEVB();setVB(vb);render()}},200)});
+$("backBtn").onclick=()=>{focus=null;sel=null;editing=false;coreOpen=false;if(orbitFor)closeOrbit();else render()};
+// tap near something counts as tapping it (big, forgiving targets for fingers and older hands)
+$("web").addEventListener("click",e=>{
+  if(editMode||orbitFor||e.target.closest(".hit"))return;
+  const q=svgPoint(e),r=$("web").getBoundingClientRect(),u=vb[2]/r.width,lim=34*u;
+  let best=null,bd=lim;const consider=(d,fn)=>{if(d<bd){bd=d;best=fn}};
+  PTS.forEach(pt=>consider(Math.hypot(q.x-pt.base.x-pt.off.x,q.y-pt.base.y-pt.off.y)-pt.pr,()=>openPoint(pt.l)));
+  cultures().forEach(c=>{const L=CL[c.id];if(!L)return;const p=polar(L.R,L.a);consider(Math.hypot(q.x-p.x,q.y-p.y)-cR(c),()=>{coreOpen=false;focus=focus==="c:"+c.id?null:"c:"+c.id;sel=null;render()})});
+  lenses().forEach((d,i)=>{const p=polar(RD,angD(i));consider(Math.hypot(q.x-p.x,q.y-p.y)-14,()=>{coreOpen=false;focus=focus==="d:"+d.id?null:"d:"+d.id;sel=null;render()})});
+  consider(Math.hypot(q.x-CX,q.y-CY)-RCORE,()=>{focus=null;sel=null;coreOpen=!coreOpen;render();if(coreOpen)ayitiPulse()});
+  if(best)best();
+});
+// guide strip
+const guideOff=()=>{$("guide").hidden=true;tryLS("lakou-guide","off")};
+if(tryLS("lakou-guide")==="off")$("guide").hidden=true;
+$("guideHide").onclick=guideOff;
+$("guideAdd").onclick=()=>{const d=$("submitDetails");d.open=true;d.scrollIntoView({behavior:reduced()?"auto":"smooth",block:"start"});setTimeout(()=>$("sT")?.focus({preventScroll:true}),400)};
+// larger text
+function setType(on){document.documentElement.classList.toggle("bigtype",on);$("typeBtn").setAttribute("aria-pressed",on);tryLS("lakou-bigtype",on?"1":"0");render()}
+$("typeBtn").onclick=()=>setType(!document.documentElement.classList.contains("bigtype"));
+if(tryLS("lakou-bigtype")==="1"){document.documentElement.classList.add("bigtype");$("typeBtn").setAttribute("aria-pressed","true")}
+// exhibit mode (open the site with #exhibit): larger text, no admin panels, returns to the start after 2 minutes idle
+if(location.hash==="#exhibit"){
+  document.documentElement.classList.add("exhibit","bigtype");$("typeBtn").setAttribute("aria-pressed","true");
+  let idle;const arm=()=>{clearTimeout(idle);idle=setTimeout(()=>{focus=null;sel=null;editing=false;coreOpen=false;closeOrbit(true);
+    S=clone(HOME||DEF_SET);syncCtl();render();$("guide").hidden=false;try{sessionStorage.removeItem("lakou-lang")}catch(e){}openIntro()},120000)};
+  ["pointerdown","keydown","pointermove"].forEach(ev=>addEventListener(ev,arm,{passive:true}));arm();
+}
+$("clearFocus").onclick=()=>{focus=null;sel=null;editing=false;coreOpen=false;closeOrbit()};
+$("resetView").onclick=()=>{S=clone(HOME||DEF_SET);syncCtl();saveSet();closeOrbit(true);render();toast("Display reset")};
+$("setHome").onclick=()=>{const snap={...S,order:S.order};
+  if(MODE==="live")write("saveIteration",{name:"Reset view · "+new Date().toLocaleDateString(),settings:snap,makeDefault:true},()=>{},"Reset view saved. Visitors start here too").then(j=>{if(j)HOME=clone(snap)});
+  else{HOME=clone(snap);tryLS("lakou-home",JSON.stringify(snap));toast("Reset view saved (in this browser)")}};
 $("editToggle").onclick=()=>{editMode=!editMode;closeOrbit(true);render();toast(editMode?"Edit mode: drag points to change shell or lens":"Edit mode off")};
 $("addForm").addEventListener("submit",e=>{e.preventDefault();const t=$("aT").value.trim();if(!t)return;
   const f={title:t,c:$("aC").value,d:$("aD").value,s:+$("aS").value,evidence:$("aK").value};
@@ -852,7 +1182,7 @@ $("linkCat").onclick=()=>write("linkCatalog",{},()=>{},"Linked older rows");
 // iterations
 $("itSave").onclick=()=>{const name=$("itName").value.trim();if(!name){toast("Give the view a name");return}
   const settings={...S};
-  if(MODE==="live")write("saveIteration",{name,settings,makeDefault:$("itDefault").checked},()=>{},"View saved to Notion");
+  if(MODE==="live"){const mk=$("itDefault").checked;write("saveIteration",{name,settings,makeDefault:mk},()=>{},"View saved to Notion").then(j=>{if(j&&mk)HOME=clone(settings)})}
   else{const L=JSON.parse(tryLS("lakou-iters")||"[]");L.unshift({id:uid("i"),name,settings});tryLS("lakou-iters",JSON.stringify(L.slice(0,30)));drawChrome();toast("View saved (in this browser)")}
   $("itName").value=""};
 $("itLoad").onclick=async()=>{const id=$("itList").value;if(!id)return;
@@ -893,6 +1223,99 @@ function recoverV1(){
     tryLS("lakou-mine-imported","1");$("recover").hidden=true;saveLocal();renderAll();toast("Brought in your earlier connectors")};
   $("recoverSkip").onclick=()=>{$("recover").hidden=true};
 }
+
+// ============ language intro (title card) ============
+const LANGS=[
+ {id:"ht",nat:"Kreyòl",en:"Haitian Creole",g:"latn",col:"#e74732"},
+ {id:"fr",nat:"Français",en:"French",g:"latn",col:"#167e91"},
+ {id:"es",nat:"Español",en:"Spanish",g:"latn",col:"#b8341f"},
+ {id:"en",nat:"English",en:"English",g:"latn",col:"#27866a",ready:true},
+ {id:"wo",nat:"Wolof",en:"Wolof",g:"latn",col:"#c99a1c"},
+ {id:"uz",nat:"Oʻzbekcha",en:"Uzbek",g:"latn",col:"#3d8fa1"},
+ {id:"ru",nat:"Русский",en:"Russian",g:"cyrl",col:"#5a6e78"},
+ {id:"uk",nat:"Українська",en:"Ukrainian",g:"cyrl",col:"#6b7378"},
+ {id:"bn",nat:"বাংলা",en:"Bengali",g:"beng",col:"#167e91"},
+ {id:"ur",nat:"اردو",en:"Urdu",g:"urdu",col:"#0e5562",rtl:true},
+ {id:"ar",nat:"العربية",en:"Arabic",g:"arab",col:"#8a6a1f",rtl:true},
+ {id:"yi",nat:"ייִדיש",en:"Yiddish",g:"hebr",col:"#d9776a",rtl:true},
+];
+const LFONT={latn:'"Archivo","Arial Black",Arial,sans-serif',cyrl:'"Noto Sans",Arial,sans-serif',beng:'"Noto Sans Bengali",sans-serif',
+  urdu:'"Noto Nastaliq Urdu","Noto Naskh Arabic",serif',arab:'"Noto Naskh Arabic",serif',hebr:'"Noto Sans Hebrew",sans-serif'};
+const LGROUP={latn:"LATIN SCRIPT",cyrl:"CYRILLIC",beng:"BENGALI",urdu:"ARABIC SCRIPT",arab:"ARABIC SCRIPT",hebr:"HEBREW"};
+const CORE_WORDS=[["LANGUAGES","latn"],["LANG","latn"],["IDIOMAS","latn"],["LANGUES","latn"],["ЯЗЫКИ","cyrl"],["ভাষা","beng"],["زبانیں","urdu"],["שפּראַכן","hebr"]];
+let LANG="en",introRAF=null,introPtr=null,introCycle=null;
+function drawIntro(){
+  const svg=$("introSvg");svg.replaceChildren();
+  const RN=300,RCo=62,n=LANGS.length;
+  // even spacing with a small gap between writing systems, English-first group at the top
+  let u=0;const sl=[];LANGS.forEach((l,i)=>{const gk=l.g==="urdu"?"arab":l.g,pk=i?(LANGS[i-1].g==="urdu"?"arab":LANGS[i-1].g):gk;if(i&&gk!==pk)u+=.6;sl.push(u);u+=1});
+  const step=2*Math.PI/(u+.6);LANGS.forEach((l,i)=>{l.a=-Math.PI/2+sl[i]*step});
+  const P=(r,a)=>({x:r*Math.cos(a),y:r*Math.sin(a)});
+  // rings, as in the matrix
+  [[150,"2 5",1.15,.6],[225,"2 5",1.15,.6]].forEach(([r,da,w,o])=>svg.append(el("circle",{r,fill:"none",stroke:"var(--muted)","stroke-dasharray":da,"stroke-linecap":"round","stroke-width":w,opacity:o})));
+  svg.append(el("circle",{r:105,fill:"none",stroke:"var(--muted)","stroke-width":.9,opacity:.55}));
+  svg.append(el("circle",{r:RN,fill:"none",stroke:"var(--muted)","stroke-dasharray":"1 7","stroke-linecap":"round","stroke-width":1.2,opacity:.65}));
+  [[RN,-.35],[RN,2.45],[225,1.15],[150,3.75]].forEach(([r,a])=>{const p=P(r,a);svg.append(arrow(p.x,p.y,-Math.sin(a),Math.cos(a),"var(--muted)",.75,.9,7))});
+  // writing-system labels, set along the inner ring like the SHELL labels
+  const groups={};LANGS.forEach(l=>{const k=LGROUP[l.g];(groups[k]=groups[k]||[]).push(l.a)});
+  Object.entries(groups).forEach(([k,as])=>{const a=(Math.min(...as)+Math.max(...as))/2,p=P(262,a),deg=a*180/Math.PI+90,flip=Math.sin(a)>0;
+    svg.append(el("text",{x:p.x,y:p.y,class:"shlabel","text-anchor":"middle","dominant-baseline":"middle",transform:`rotate(${flip?deg+180:deg} ${p.x} ${p.y})`},k))});
+  // spokes + nodes
+  const gS=el("g"),gN=el("g");svg.append(gS,gN);
+  LANGS.forEach(l=>{
+    const on=!!l.ready,col=on?l.col:"var(--rule)";
+    l.sp=el("line",{stroke:on?l.col:"var(--muted)","stroke-width":on?2.6:1,"stroke-linecap":"round",opacity:on?.8:.35,"stroke-dasharray":on?null:"3 5"});gS.append(l.sp);
+    if(on){const pa=P(RCo+20,l.a);gS.append(arrow(pa.x,pa.y,-Math.cos(l.a),-Math.sin(l.a),"var(--vermilion)",.9,1.2,8))}
+    const g=el("g",{class:"ilang"+(on?"":" off"),tabindex:"0",role:"button","aria-disabled":on?"false":"true","aria-label":`${l.nat} (${l.en})${on?"":", translation coming soon"}`,opacity:on?1:.42});
+    g.append(el("circle",{r:on?15:12,fill:on?l.col:"var(--sheet)",stroke:on?"var(--sheet)":"var(--muted)","stroke-width":on?3:1.8,"stroke-dasharray":on?null:"3 2.5",class:"ifocus"}));
+    const cos=Math.cos(l.a),sin=Math.sin(l.a),side=Math.abs(cos)<.3?"middle":cos>0?"start":"end";
+    const lx=cos*30,ly=sin*30+(side==="middle"?(sin<0?-12:24):6);
+    const nm=el("text",{x:lx,y:ly,"text-anchor":side,class:"clabel",style:`font-family:${LFONT[l.g]};font-weight:800;font-size:${l.g==="urdu"?20:23}px`},l.nat);
+    if(l.rtl)nm.setAttribute("direction","rtl");g.append(nm);
+    g.append(el("text",{x:lx,y:ly+(l.g==="urdu"?24:20),"text-anchor":side,class:"csub"},on?l.en:`${l.en} · coming soon`));
+    g.append(el("title",{},on?`${l.nat}: enter the matrix`:`${l.en}: translation coming soon`));
+    const act=()=>chooseLang(l,g);g.addEventListener("click",act);g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act()}});
+    l.g_=g;l.off={x:0,y:0};l.k=1;gN.append(g)});
+  // core, identical to the matrix core
+  svg.append(el("circle",{r:RCo,fill:"var(--ink)"}),el("circle",{r:RCo+6,fill:"none",stroke:"var(--vermilion)","stroke-width":3}));
+  const ct=el("text",{y:5,"text-anchor":"middle",style:"font:900 15px var(--f-display);font-stretch:125%;fill:var(--sheet)"},"LANGUAGES");
+  svg.append(ct,el("text",{y:24,"text-anchor":"middle",style:"font:300 10px var(--f-body);fill:var(--sheet);opacity:.75;letter-spacing:.14em"},"LAKOU MATRIX"));
+  let wi=0;clearInterval(introCycle);
+  introCycle=setInterval(()=>{const [w,gk]=CORE_WORDS[++wi%CORE_WORDS.length];ct.textContent=w;ct.style.fontFamily=LFONT[gk];ct.setAttribute("direction",/[֐-ۿ]/.test(w)?"rtl":"ltr")},1700);
+  svg.onpointermove=e=>{const r=svg.getBoundingClientRect(),vbb=svg.viewBox.baseVal;introPtr={x:vbb.x+(e.clientX-r.left)/r.width*vbb.width,y:vbb.y+(e.clientY-r.top)/r.height*vbb.height}};
+  svg.onpointerleave=()=>introPtr=null;
+  const tick=()=>{LANGS.forEach(l=>{const b=P(RN*l.k,l.a);let tx=0,ty=0;
+      if(introPtr&&!reduced()&&l.k===1){const dx=introPtr.x-b.x,dy=introPtr.y-b.y,d2=dx*dx+dy*dy,d=Math.sqrt(d2)||1;if(d<220){const m=Math.min(16,9000/(d2+350));tx=dx/d*m;ty=dy/d*m}}
+      l.off.x+=(tx-l.off.x)*.14;l.off.y+=(ty-l.off.y)*.14;const x=b.x+l.off.x,y=b.y+l.off.y;
+      l.g_.setAttribute("transform",`translate(${x.toFixed(1)} ${y.toFixed(1)})`);
+      const s0=P(RCo+8,l.a),dd=Math.hypot(x,y),e=dd>1?{x:x*(1-17/dd),y:y*(1-17/dd)}:{x,y};
+      l.sp.setAttribute("x1",s0.x);l.sp.setAttribute("y1",s0.y);l.sp.setAttribute("x2",e.x);l.sp.setAttribute("y2",e.y)});
+    introRAF=requestAnimationFrame(tick)};
+  cancelAnimationFrame(introRAF);introRAF=requestAnimationFrame(tick);
+}
+function drawIntroList(){const ul=$("introList");ul.replaceChildren();
+  LANGS.slice().sort((a,b)=>(b.ready?1:0)-(a.ready?1:0)).forEach(l=>{const li=document.createElement("li"),b=document.createElement("button");b.type="button";
+    b.setAttribute("aria-disabled",l.ready?"false":"true");
+    b.innerHTML=`<svg width="30" height="30" viewBox="-15 -15 30 30" aria-hidden="true">${l.ready?`<circle r="11" fill="${l.col}" stroke="var(--sheet)" stroke-width="2.5"/>`:`<circle r="9" fill="none" stroke="var(--muted)" stroke-width="1.6" stroke-dasharray="3 2.5"/>`}</svg>
+      <span><span class="nm" style="font-family:${LFONT[l.g]}"${l.rtl?' dir="rtl"':''}>${esc(l.nat)}</span><span class="en">${esc(l.en)}${l.ready?"":" · coming soon"}</span></span><span class="go">Enter →</span>`;
+    b.onclick=()=>chooseLang(l,b);li.append(b);ul.append(li)})}
+function openIntro(){const it=$("intro");it.classList.remove("out");it.hidden=false;$("introMsg").textContent="Tap a language to enter the matrix.";drawIntro();drawIntroList();
+  setTimeout(()=>{const f=LANGS.find(l=>l.id===LANG&&l.ready)||LANGS.find(l=>l.ready);f?.g_?.focus({preventScroll:true})},60)}
+function closeIntro(){const it=$("intro");it.classList.add("out");setTimeout(()=>{it.hidden=true;it.classList.remove("out");cancelAnimationFrame(introRAF);clearInterval(introCycle)},reduced()?0:540)}
+function chooseLang(l,g){
+  if(!l.ready){$("introMsg").textContent=`${l.en} is coming soon. Choose English for now; you can still write your submission in ${l.en}.`;
+    if(!reduced()){g.classList.remove("ishake");void (g.getBBox?g.getBBox():g.offsetWidth);g.classList.add("ishake")}return}
+  LANG=l.id;try{sessionStorage.setItem("lakou-lang",l.id)}catch(e){}
+  $("langBtn").textContent="Language · "+l.nat;
+  if(reduced()){closeIntro();return}
+  // the languages fall into the core, then the card lifts away to reveal the matrix
+  const t0=performance.now();const pull=t=>{const k=Math.min(1,(t-t0)/520),e=k*k*(3-2*k);LANGS.forEach(x=>{x.k=1-e*.82;x.g_.setAttribute("opacity",(x.ready?1:.42)*(1-e))});
+    if(k<1)requestAnimationFrame(pull);else closeIntro()};requestAnimationFrame(pull);
+}
+$("langBtn").onclick=openIntro;
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("intro").hidden&&LANGS.some(l=>l.id===LANG&&l.ready)&&sessionStorage.getItem?.("lakou-lang"))closeIntro()});
+(()=>{let seen=null;try{seen=sessionStorage.getItem("lakou-lang")}catch(e){}
+  const l=LANGS.find(x=>x.id===seen&&x.ready);if(l){LANG=l.id;$("langBtn").textContent="Language · "+l.nat}else openIntro()})();
 
 boot();
 </script>
